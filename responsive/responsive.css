@@ -1,0 +1,72 @@
+/*130x240*/
+
+@media (min-width: 1200px){
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) 0px 0px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 1100px) and (max-width: 1201px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -128px -0px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 1000px) and (max-width: 1101px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -256px -0px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 900px) and (max-width: 1001px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -384px -0px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 800px) and (max-width: 901px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -512px -0px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 700px) and (max-width: 801px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) 0px -240px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 600px) and (max-width: 701px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -128px -240px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 500px) and (max-width: 601px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -256px -240px;
+		background-repeat: no-repeat;
+	}
+}
+
+@media (min-width: 400px) and (max-width: 501px) {
+
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -384px -240px;
+		background-repeat: no-repeat;
+	}	
+}
+
+@media (max-width: 400px) {
+	body {
+		background: url(http://tuftsdev.github.io/WebProgramming/assignments/software.png) -512px -240px;
+	    background-repeat: no-repeat;
+	}
+}
