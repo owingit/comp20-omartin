@@ -9,10 +9,13 @@ function draw() {
     if (canvas.getContext) {
         var ctx = document.getElementById('game_canvas').getContext('2d');
 	    var img = new Image();
+	    var ms_pac_img = new Image();
 	    img.onload = function(){
 	      ctx.drawImage(img,320,0,600,125,0,0,600,130);
+	      ctx.drawImage(ms_pac_img,80,25,20,18,36,35,21,20);
   		};
   		img.src = 'pacman10-hp-sprite.png';
+  		ms_pac_img.src = 'pacman10-hp-sprite.png';
     }
 
     else {
