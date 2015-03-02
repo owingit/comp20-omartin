@@ -11,7 +11,7 @@ function draw() {
 	    var img = new Image();
 	    var ms_pac_img = new Image();
 	    img.onload = function(){
-	      ctx.drawImage(img,320,0,600,125,0,0,600,130);
+	      ctx.drawImage(img,320,0,600,135,0,0,600,140);
 	      ctx.drawImage(ms_pac_img,80,25,20,18,36,35,21,20);
   		};
   		img.src = 'pacman10-hp-sprite.png';
