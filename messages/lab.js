@@ -1,7 +1,7 @@
 function parse() {
 	var req = new XMLHttpRequest();
 
-	req.open("get", "data.json", true);
+	req.open("get", "http://messagehub.herokuapp.com/messages.json", true);
 
 	req.onreadystatechange = function() {
 		if (req.readyState == 4 && req.status == 200) {
