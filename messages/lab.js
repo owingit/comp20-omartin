@@ -11,6 +11,7 @@ function parse() {
 					result += "<p>" + vals[i]['content'] + " - " + vals[i]['username'] + "</p>";
 			}
         	document.getElementById("messages").innerHTML = result;
+        	toUpdate = document.getElementById("content");
     	}
    }
    req.send();
