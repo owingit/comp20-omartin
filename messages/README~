@@ -1,0 +1,11 @@
+##README for Lab 6
+##Owen Martin
+
+1. I correctly implemented all aspects of this assignment. The answer to the
+question (whether loading the .json from a different origin works or not) is
+no. When loading the .json from the heroku host, the XMLHttpRequest fails. This
+is because XMLHttpRequests follow a same-origin policy that requires the host
+be the same as the host serving the original web page. Pulling from the heroku
+file would violate that policy, and so the request fails.
+
+2. 
