@@ -19,15 +19,15 @@ function toRad(x) {
     return x * Math.PI / 180;
 }
 function distanceBetween(pos1, pos2) {
-    // code based on code provided by instructor
-    var lat2 = pos2.lat();
-    var lon2 = pos2.lng();
+    // math for lat/lng position
     var lat1 = pos1.lat();
     var lon1 = pos1.lng();
+    var lat2 = pos2.lat();
+    var lon2 = pos2.lng();
     var R = 6371; // km 
     var x1 = lat2-lat1;
-    var dLat = toRad(x1);
     var x2 = lon2-lon1;
+    var dLat = toRad(x1);
     var dLon = toRad(x2);
     var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
         Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * 
@@ -37,13 +37,13 @@ function distanceBetween(pos1, pos2) {
     return d * 0.621371;
 }
 navigator.geolocation.getCurrentPosition(function (pos) { position = pos;});
-//both pos1 and pos2 are expected as JSON of the form {lat:*latitude*, lng:*longitude*
+// pos1 and pos2 should be JSON of the form {lat:*latitude*, lng:*longitude*
 function initialize() {
     var mapOptions = {
         center: { lat: position.coords.latitude,lng:position.coords.longitude },
-        zoom: 16,
+        zoom: 20,
         styles: [
-        {stylers:[{hue: "#aa5500"}, {saturation: -20}]}]
+        {stylers:[{hue: "#aa5500"}, {saturation: -10}]}]
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),
             mapOptions);
@@ -58,6 +58,9 @@ xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
         people = JSON.parse(xhr.responseText);
         distances = people.characters.map(function(person) {
+                var points = [
+                new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                new google.maps.LatLng(person.loc.latitude, person.loc.longitude)];
                 var marker = new google.maps.Marker({map:map, 
                     position:{lat:person.loc.latitude, lng:person.loc.longitude}, 
                     icon:person.name+'.png'}) 
@@ -65,9 +68,6 @@ xhr.onreadystatechange = function () {
                     {content:"<h1>"+names[person.name]+"</h1><p>Latitude:"
                     +person.loc.latitude+"</p><p>Longitude:"+person.loc.longitude
                     +"</p><p>Note:"+person.loc.note+"</p>",disableAutoPan:true});
-                var points = [
-                new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                new google.maps.LatLng(person.loc.latitude, person.loc.longitude)];
                 var polyLine = new google.maps.Polyline({path:points,
                     geodesic : true,
                     strokeColor : 0x0000FF,
