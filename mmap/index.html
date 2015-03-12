@@ -94,7 +94,7 @@
         function checkReady() {
             if (request.readyState == 4 && request.status == 200) {
                 student_list = JSON.parse(request.responseText);
-                for (i = 0; i < students.length; i++) {
+                for (i = 0; i < student_list.length; i++) {
                     createStudentMarker(student_list[i].login, student_list[i].lat, student_list[i].lng, student_list[i].created_at);
                 }
                 var sort = [];
