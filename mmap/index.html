@@ -57,7 +57,7 @@ xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr.onreadystatechange = function () {
     if (xhr.readyState == 4 && xhr.status == 200) {
         people = JSON.parse(xhr.responseText);
-        distances = people.characters.map(function(person) {
+        distances = people.characters.Map(function(person) {
                 var points = [
                 new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
                 new google.maps.LatLng(person.loc.latitude, person.loc.longitude)];
