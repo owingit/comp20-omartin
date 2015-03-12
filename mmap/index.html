@@ -10,9 +10,9 @@
         <script>
         var myLat = 40;
         var myLng = -70;
-        var request = new XMLHttpRequest();
+        var xhr = new XMLHttpRequest();
         var me;
-        var map = null;
+        var map;
         var marker;
         var student_list;
         var info = new google.maps.InfoWindow();
@@ -21,12 +21,12 @@
             center: me,
             mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-        var distances = [];
+        var distances = {};
 
         function distanceMath(lat1, lat2, long1, long2) {
-                Number.prototype.toRad = function() {
-                    return this * Math.PI / 180;
-                }
+            Number.prototype.toRad = function() {
+                return this * Math.PI / 180;
+            }
                 var R = 6371; //km
                 var x1 = lat2-lat1;
                 var dLat = x1.toRad();  
@@ -67,19 +67,19 @@
                 
             google.maps.event.addListener(marker, 'click', function() {
                 info.setContent(marker.title);
-                                info.open(map, marker);
+                info.open(map, marker);
             });
-            request = new XMLHttpRequest();
-            request.open("post", "https://secret-about-box.herokuapp.com/sendLocation","true");
-            request.onreadystatechange = checkReady;
-            request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            request.send("login=JoyceVandeVorde&lat="+myLat+"&lng="+myLng);
+            xhr = new XMLHttpRequest();
+            xhr.open("post", "https://secret-about-box.herokuapp.com/sendLocation","true");
+            xhr.onreadystatechange = checkReady;
+            xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xhr.send("login=JoyceVandeVorde&lat="+myLat+"&lng="+myLng);
         }
 
         function createStudentMarker(name, lat, lng, time)
         {
             var marker = new google.maps.Marker({
-                            map: map,
+                map: map,
                 position: new google.maps.LatLng(lat, lng)
             });
             google.maps.event.addListener(marker, 'click', function() {
@@ -92,8 +92,8 @@
         }     
             
         function checkReady() {
-            if (request.readyState == 4 && request.status == 200) {
-                student_list = JSON.parse(request.responseText);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                student_list = JSON.parse(xhr.responseText);
                 for (i = 0; i < student_list.length; i++) {
                     createStudentMarker(student_list[i].login, student_list[i].lat, student_list[i].lng, student_list[i].created_at);
                 }
@@ -113,3 +113,4 @@
     <body onload="init()">
         <div id="map_canvas"></div>
     </body>
+</html>
