@@ -4,6 +4,7 @@
     <head>
         <link rel="stylesheet" href="style.css" type="text/css">
         <title>Marauder's Map</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <script type="text/javascript"
         src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=places">
         </script>
@@ -50,6 +51,7 @@
                     myLat = position.coords.latitude;
                     myLng = position.coords.longitude;                       
                     renderMap();
+                    console.log(xhr.responseText); 
                 });
             }
             else {
