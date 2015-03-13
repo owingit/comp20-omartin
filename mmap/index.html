@@ -97,6 +97,7 @@
         function checkReady() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 student_list = JSON.parse(xhr.responseText);
+                console.log(xhr.responseText);
                 for (i = 0; i < student_list.length; i++) {
                     createStudentMarker(student_list[i].login, student_list[i].lat, student_list[i].lng, student_list[i].created_at);
                 }
