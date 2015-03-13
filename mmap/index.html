@@ -12,7 +12,7 @@
         var myLat = 40;
         var myLng = -70;
         var xhr = new XMLHttpRequest();
-        var me;
+        var me = new google.maps.LatLng(myLat, myLng);
         var map;
         var marker;
         var student_list;
@@ -24,7 +24,7 @@
             };
         var distances = {};
 
-        function distanceMath(lat1, lat2, long1, long2) {
+        function distanceMath(lat1, lat2, long1, long2) { //Haversine formula
             Number.prototype.toRad = function() {
                 return this * Math.PI / 180;
             }
@@ -40,11 +40,9 @@
                 var d = R * c;
                 return d * 0.621; 
         }
-        function init() {
+        function init() { //based off Ming's code
                 map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-                console.log("before get my location");
                 getMyLocation();
-                console.log("after get ly location");
             }
 
         function getMyLocation() {
@@ -59,8 +57,7 @@
                 alert ("Geolocation is not supported by your web browser.");
             }
         }
-        function renderMap() {
-            me = new google.maps.LatLng(myLat, myLng);
+        function renderMap() { //based off Ming's code
             map.panTo(me);
             marker = new google.maps.Marker({
                 position: me,
@@ -97,7 +94,6 @@
         function checkReady() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 student_list = JSON.parse(xhr.responseText);
-                console.log(xhr.responseText);
                 for (i = 0; i < student_list.length; i++) {
                     createStudentMarker(student_list[i].login, student_list[i].lat, student_list[i].lng, student_list[i].created_at);
                 }
