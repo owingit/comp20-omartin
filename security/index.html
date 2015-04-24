@@ -1,1 +1,51 @@
-<!--DOCTYPE HTML>
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	 <title>Marauder's Map Server Security Report</title>
+	 <link rel="stylesheet" type="text/css" href="style.css"></link>
+</head>
+
+<body>
+<h1>Security Assessment of the Marauder's Map and Server</h1>
+<p>Analyst: <a href = "http://owingit.github.io">Owen Martin</a> on 24 April 2015</p>
+
+<h1 class ="header">I. Introduction</h1>	
+
+<p>Security flaws are all over the place in web programming, and can lead to real concerns when an attacker can exploit these flaws to gain access to private information. This assessment looks to identify these flaws, and provide suggestions for improvement, within the Marauder's Map web application. The locations app that I was assigned to was created by Maggie Chapman and can be found <a href = "sheltered-ocean-8532.herokuapp.com">here</a>. </p>
+
+<p>There are a bunch of possible vulnerabilities due to the specifications of the locations app. Primarily, there is no authentication required, so any random user can submit any random string as a login and any random integers as a latitude and longitude, which is both a functionality problem and a security hazard because it relies on user input.</p>
+
+<h1 class ="header">II. Methodology</h1>
+<p>To begin testing, I pretended to be an assailant and initially only performed "black-box" attacks - those that don't have access to the source code that Maggie provided for me - but I eventually looked at her work in more depth to expose other problems. I use the terminal command <code>curl</code> to carry out my onslaught.</p>
+
+<h1 class ="header">III. Abstract of Findings</h1>
+<p>My findings can be summed up in a few simple words: <strong>NEVER TRUST USER INPUT! </strong> Code that neglects to assert user correctness is always going to be vulnerable to a nefarious user that could submit data containing formatting that is designed to break the web application. The code that I assessed failed to deal with user input that included <code>script</code> or <code>style</code> tags. </p>
+
+<h1 class ="header">IV. Issues Discovered</h1>
+<ol>
+<li><p><strong>Cross-Cross-Site Scripting (XSS)</strong></p>
+
+	<ul><li>This is a big security risk. While performing a black box attack, I was able to inject javascript style code that completely altered the appearance of the web application simply through user input. The web application was rendered unusable, leading me to assign this a <strong>HIGH!</strong> risk level.</li>
+	<li>It's an easy fix, but an important one.</li>
+	<li>I ran the command a curl command injecting an image to the page's background for some amusing results. Initially, the web page was blue with a list of users and their respective latitudes and longitudes, but after running my attack it looked something like this: 
+	<table class="Table">
+	<tr><td><img src="post-xss.png" alt="post-xss" title="Client site after XSS attack" /></td></tr>
+	</table></li>
+	<li>As you can see, the fail whale has taken over. This is a problem. </li><li>To solve this issue, simply escape user input to its HTML-code equivalent. This will remove dangerous characters used in <code>script</code> code. This escaping can be done by filtering the input through a list of allowable characters, and resticting dangerous things line '<', '>', etc..</li>
+	</ul>
+<li><p><strong>Submitting large input causes the server to break</strong></p>
+
+	<ul><li>This is a functional risk because the last thing any user wants is for their beloved Locations webapp to stop working. Unfortunately, if your login name happens to be too big, the page on herokuapp will stop displaying any kind of data. This is a <strong>moderate</strong> risk because the site is still functional, it just breaks on all data submitted up to and including the large string.
+	</li><li>Curling a username that was 500 characters long caused the website to revert to just the blue background, displaying none of the previous logins or the current login.</li>
+	<li>To fix this, add a character limit of something small like 15 or 20 to each field! This will prevent overloading a field with some aggressive 
+	</ul>
+
+<li><p><strong>I was only able to find two notable security flaws.</strong></p></li>
+
+</li></ul></li></li></ol>
+
+<h1 class ="header">V. Conclusion</h1>
+<p>While this Marauder's Map web application boasts only a pair of easily identifiable security faults, the severity of these issues makes it very simple to turn a functioning web application into a useless page that displays ASCII art in fun shapes. If the recommendations provided in section IV are followed, the security of the application should be ensured. </p>
+</body>
+</html>
