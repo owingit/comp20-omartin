@@ -10,4 +10,4 @@
    sit in a cafe and think of interesting ways to mess up a website.
 
 4. I feel bad because now Maggie's app just has a big picture of a "fail
-   "whale" insetad of a lovely list of logins. Oops. 
+   whale" instead of a lovely list of logins. Oops. 
